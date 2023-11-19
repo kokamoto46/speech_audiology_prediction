@@ -3,8 +3,8 @@ import joblib
 import numpy as np
 
 # Load the saved model and scaler
-model = joblib.load('./logistic_regression_best_model.pkl')
-scaler = joblib.load('./scaler.pkl')
+model = joblib.load('logistic_regression_best_model.pkl')
+scaler = joblib.load('scaler.pkl')
 
 # Streamlit app
 st.title('Predicting the necessity for tube feeding in acute stroke patients')
