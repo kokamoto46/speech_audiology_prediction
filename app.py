@@ -7,7 +7,7 @@ model = joblib.load('logistic_regression_best_model.pkl')
 scaler = joblib.load('scaler.pkl')
 
 # Streamlit app
-st.title('Predicting the necessity for tube feeding in acute stroke patients')
+st.title('Predicting the necessity for enteral nutrition in acute stroke patients')
 
 # Input form
 with st.form(key='input_form'):
