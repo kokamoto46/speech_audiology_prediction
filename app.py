@@ -25,6 +25,6 @@ if submit_button:
 
     # Display the result
     if prediction[0] == 0:
-        st.write('Tube feeding is not necessary')
+        st.write('Does not necessitate enteral nutrition')
     else:
-        st.write('Tube feeding is necessary')
+        st.write('Necessitates enteral nutrition')
