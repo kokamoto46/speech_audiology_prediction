@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 get_ipython().system('pip install xgboost')
-
-from google.colab import drive
-drive.mount("/content/drive")
 
 import pandas as pd
 import numpy as np
@@ -31,7 +25,7 @@ from numpy import mean, std
 import joblib
 
 # Load the dataset
-df = pd.read_csv("/content/drive/MyDrive/PD3.csv")
+df = pd.read_csv('C:/Users/kokamoto/Desktop/data.csv')
 
 # Correlational Analysis
 corr = np.corrcoef(df.values.T)
@@ -55,7 +49,7 @@ x = df[["FIM-M", "FIM-C", "SI"]]
 y = df["Tube"].values.ravel()  # Flatten y to 1D array
 scaler = StandardScaler()
 x_scaled = scaler.fit_transform(x)
-joblib.dump(scaler, '/content/drive/MyDrive/scaler.pkl')  # Save the scaler
+joblib.dump(scaler, 'C:/Users/kokamoto/Desktop/scaler.pkl')  # Save the scaler
 
 # Cross-validation setup
 cv = StratifiedKFold(n_splits=5, random_state=0, shuffle=True)
@@ -154,10 +148,6 @@ svc_results = cross_validate_and_tune(svc, svc_params, x_scaled, y, "svm")
 forest_results = cross_validate_and_tune(forest, forest_params, x_scaled, y, "random_forest")
 xgb_results = cross_validate_and_tune(xgb, xgb_params, x_scaled, y, "xgboost")
 
-
-# In[ ]:
-
-
 # Extracting results for each model
 log_accuracy, log_roc, log_recall, log_specificity, _ = log_results
 tree_accuracy, tree_roc, tree_recall, tree_specificity, _ = tree_results
@@ -186,10 +176,6 @@ print("XGBoost Accuracy:", np.mean(xgb_accuracy))
 print("XGBoost AUC:", np.mean(xgb_roc))
 print("XGBoost Recall:", np.mean(xgb_recall))
 print("XGBoost Specificity:", np.mean(xgb_specificity))
-
-
-# In[ ]:
-
 
 print("Logistic Regression Accuracy:",log_accuracy)
 print("Logistic Regression AUC:",log_roc)
