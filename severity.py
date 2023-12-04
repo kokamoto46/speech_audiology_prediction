@@ -1,13 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 get_ipython().system('pip install xgboost')
-
-from google.colab import drive
-drive.mount("/content/drive")
 
 import pandas as pd
 import numpy as np
@@ -27,7 +21,7 @@ import itertools
 plt.style.use("ggplot")
 
 # Load the dataset
-df = pd.read_csv("/content/drive/MyDrive/PD3.csv")
+df = pd.read_csv('C:/Users/kokamoto/Desktop/data.csv')
 
 # Correlational Analysis
 corr = np.corrcoef(df.values.T)
@@ -115,10 +109,6 @@ print("Random Forest F1:", forest_f1)
 print("XGBoost Accuracy:", xgb_accuracy)
 print("XGBoost F1:", xgb_f1)
 
-
-# In[ ]:
-
-
 print("Logistic Regression Accuracy:", {np.mean(log_accuracy)})
 print("Logistic Regression f1:", {np.mean(log_f1)})
 print("Decision Tree Accuracy:", {np.mean(tree_accuracy)})
@@ -129,10 +119,3 @@ print("Random Forest Accuracy:", {np.mean(forest_accuracy)})
 print("Random Forest f1:", {np.mean(forest_f1)})
 print("XGBoost Accuracy:", {np.mean(xgb_accuracy)})
 print("XGBoost f1:", {np.mean(xgb_f1)})
-
-
-# In[ ]:
-
-
-get_ipython().system('python --version')
-
