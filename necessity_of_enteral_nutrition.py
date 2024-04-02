@@ -49,9 +49,9 @@ x = df[["FIM-M", "FIM-C", "SI"]]
 y = df["Tube"].values.ravel()  # Flatten y to 1D array
 scaler = StandardScaler()
 x_scaled = scaler.fit_transform(x)
-joblib.dump(scaler, 'C:/Users/kokamoto/Desktop/scaler.pkl')  # Save the scaler
+joblib.dump(scaler, 'C:/Users/kokamoto/Desktop/scaler.pkl')  
 
-# Cross-validation setup
+# Cross-validation
 cv = StratifiedKFold(n_splits=5, random_state=0, shuffle=True)
 
 # Function to perform cross-validation and hyperparameter tuning
