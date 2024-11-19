@@ -1,30 +1,36 @@
 import streamlit as st
 import joblib
-import numpy as np
+import pandas as pd
 
-# Load the saved model and scaler
-model = joblib.load('logistic_regression_best_model.pkl')
-scaler = joblib.load('scaler.pkl')
+# Load the saved model and related objects
+model = joblib.load("stacking_model.pkl")
+scaler = joblib.load("scaler.pkl")
+selected_features = joblib.load("selected_features.pkl")
 
-# Streamlit app
-st.title('Predicting the necessity for enteral nutrition in acute stroke patients')
+# Streamlit app configuration
+st.title("Dysphagia Screening Application")
+st.write("Enter the following features to predict the value of FILS score.")
 
-# Input form
-with st.form(key='input_form'):
-    fim_m = st.number_input('Enter Motor Functional Independence Measure value', format='%f')
-    fim_c = st.number_input('Enter Cognitive Functional Independence Measure value', format='%f')
-    si = st.number_input('Enter Speech Intelligibility value',format='%f')
-    submit_button = st.form_submit_button(label='Predict')
+# User input fields
+FIM motor = st.number_input("FIM motor", min_value=13.0, max_value=91.0, value=0.0, step=1.0)
+Duration since stroke onset = st.number_input("Duration since stroke onset ", min_value=0.0, max_value=365.0, value=0.0, step=1.0)
+FIM cognition = st.number_input("FIM cognition", min_value=5.0, max_value=35.0, value=0.0, step=1.0)
+Japan Coma Scale = st.number_input("Japan Coma Scale", min_value=0.0, max_value=300.0, value=0.0, step=1.0)
 
-# Prediction
-if submit_button:
-    input_data = np.array([[fim_m, fim_c, si]])
-    # Scale the input data
-    scaled_input = scaler.transform(input_data)
-    prediction = model.predict(scaled_input)
+# Convert input values to DataFrame
+input_data = pd.DataFrame({
+    "FIM motor": [FIM motor],
+    "Duration since stroke onset": [Duration since stroke onset],
+    "FIM cognition": [FIM cognition],
+    "Japan Coma Scale": [Japan Coma Scale]
+})
 
-    # Display the result
-    if prediction[0] == 0:
-        st.write('Does not necessitate enteral nutrition')
-    else:
-        st.write('Necessitates enteral nutrition')
+# Scale the data and select features
+input_scaled = scaler.transform(input_data)
+input_selected = selected_features.transform(input_scaled)
+
+# Execute prediction
+if st.button("Predict"):
+    prediction = model.predict(input_selected)
+    st.subheader("Prediction Result")
+    st.write(f"Predicted FILS score: {prediction[0]:.2f}")
