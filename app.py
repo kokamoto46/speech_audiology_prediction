@@ -19,10 +19,10 @@ japan_coma_scale = st.number_input("Japan Coma Scale", min_value=0.0, max_value=
 
 # Convert input values to DataFrame
 input_data = pd.DataFrame({
-    "FIM motor": [fim_motor],
-    "Duration since stroke onset": [duration_since_stroke_onset],
-    "FIM cognition": [fim_cognition],
-    "Japan Coma Scale": [japan_coma_scale]
+    "fim_motor": [fim_motor],
+    "duration_since_stroke_onset": [duration_since_stroke_onset],
+    "fim_cognition": [fim_cognition],
+    "japan_coma_scale": [japan_coma_scale]
 })
 
 # Scale the data and select features
