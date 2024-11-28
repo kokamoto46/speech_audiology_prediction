@@ -26,7 +26,11 @@ input_data = pd.DataFrame({
 
 # Ensure column names match the scaler's expected input
 expected_features = ["fim_motor", "fim_cognition", "duration_since_stroke_onset", "japan_coma_scale"]
-if list(input_data.columns) != expected_features:
+
+# Adjust column order to match expected features
+try:
+    input_data = input_data[expected_features]
+except KeyError:
     st.error("Input features do not match the expected feature names!")
     st.write(f"Expected: {expected_features}")
     st.write(f"Received: {list(input_data.columns)}")
@@ -39,4 +43,3 @@ else:
         prediction = model.predict(input_scaled)
         st.subheader("Prediction Result")
         st.write(f"Predicted FILS score: {prediction[0]:.2f}")
-
