@@ -25,6 +25,14 @@ input_data = pd.DataFrame({
     "japan_coma_scale": [japan_coma_scale]
 })
 
+# Debugging: Check expected features
+expected_features = scaler.feature_names_in_
+st.write(f"Scaler expects features: {expected_features}")
+st.write(f"Input data features: {list(input_data.columns)}")
+
+# Adjust column names to match expected features
+input_data.columns = scaler.feature_names_in_
+
 # Scale the data and select features
 input_scaled = scaler.transform(input_data)
 input_selected = selected_features.transform(input_scaled)
