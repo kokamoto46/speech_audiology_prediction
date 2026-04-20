@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "Acute stroke swallowing status estimation (FILS thresholds)"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "Okamoto"
+    given-names: "Kazuhiro"
+repository-code: "https://github.com/kokamoto46/speech_audiology_prediction"
+license: MIT
+version: 0.1.0
+date-released: "2026-04-20"
